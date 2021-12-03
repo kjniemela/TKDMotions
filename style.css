@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 46%;
+  min-width: 400px;
+  margin: 2%;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+label {
+  display: inline-block;
+  margin-left: 2%;
+  width: 90px;
+}
+
+.heading {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  width: 80%;
+}
+
+.label {
+  margin-left: 2%;
+  width: 40%;
+}
+
+.weight {
+  margin: 0 0;
+  width: 46%;
+}
+
+.xBtn {
+  margin: 0 0;
+  width: 8%;
+}

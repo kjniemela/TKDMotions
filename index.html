@@ -1,43 +1,34 @@
 <!DOCTYPE HTML>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-	<p id="cont"></p>
-	<script>
-		function getRndInteger(min, max) {
-			return Math.floor(Math.random() * ((max+1) - min) ) + min;
-		}
-		strikes = ['punch', 'middle punch', 'ridge hand', 'inverted ridge hand', 'backfist', 'reverse punch', 'chop', 'spear-hand', 'tigermouth']
-		blocks = ['down', 'up', 'double knife-hand', 'knife-hand', 'inside-outside', 'outside-inside', 'downward palm', 'push', 'y', 'high-low', 'x']
-        stances = {
-    		'front': [[...strikes, 'c punch', 'oxjaw', 't-strike'], [...blocks]],
-    		'back': [[...strikes], [...blocks]],
-    		'tiger': [[...strikes, 'oxjaw'], [...blocks]],
-    		'horse': [[...strikes], [...blocks, 'mountain']],
-    		'twisted': [[...strikes], [...blocks]],
-    		'crane': [[...strikes], [...blocks]]
-		}
-		stanceKeys = ['front', 'back', 'tiger', 'horse', 'twisted', 'crane']
-		times = 3
-		lastStance = ""
-		stance = ""
-		function newText() {
-			text = ""
-			for (i=0; i<times; i++) {
-				if (getRndInteger(0, 2) > 0 || i == 0) {rp = "Retreating"} else {rp = "Pivoting"};
-				if (getRndInteger(0, 1) == 1) {a = "Advancing"} else {a = rp}
-		        stance = stanceKeys[getRndInteger(0, getRndInteger(3, getRndInteger(3, 5)))]
-		        while(a == "Pivoting" && stance == lastStance) {
-		            stance = stanceKeys[getRndInteger(0, getRndInteger(3, getRndInteger(3, 5)))]
-		        }
-		        sb = getRndInteger(0, 1)
-		        t = stances[stance][sb][getRndInteger(0, (stances[stance][sb].length)-1)]
-		        if (sb==1) {bl = " Block"} else {bl = ""}
-		        //console.log(a+" "+t+bl+" in a "+stance+" Stance")
-		        lastStance = stance
-		        text+=a+" "+t+bl+" in a "+stance+" Stance"+'<br>'
-		    }
-			document.getElementById('cont').innerHTML = text
-		}
-		newText()
-	</script>
-	<button type="button" onclick="newText()">Refresh</button>
+  <div id="app">
+    <div class="container">
+      <button type="button" onclick="handleChange()">Refresh</button>
+      <button type="button" onclick="toggleConfig()">Config</button>
+      <button type="button" onclick="exportConfig()">Export</button>
+      <button type="button" onclick="importConfig()">Import</button>
+      <br>
+      <label for="setLen">Set size:</label>
+      <input type="number" id="setLen" value="3" onchange="handleChange()">
+      <br>
+      <label for="sets">Num of Sets:</label>
+      <input type="number" id="sets" value="3" onchange="handleChange()">
+      <br><br>
+      <div id="content"></div>
+    </div>
+    <div class="container" id="config"></div>
+  </div>
+  <script src="config.js"></script>
+  <script src="motions.js"></script>
+  <script>
+    nextSet(3, 3)
+    function handleChange() {
+      nextSet(
+        document.getElementById('setLen').value,
+        document.getElementById('sets').value
+      );
+    }
+  </script>
 </body>
