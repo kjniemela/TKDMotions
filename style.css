@@ -19,7 +19,7 @@
 }
 
 button {
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 5px;
   border-style: outset;
   margin: 2px 2px;
@@ -42,7 +42,9 @@ label {
 }
 
 input {
-  margin: 0 0;
+  border-width: 1px;
+  border-radius: 5px;
+  margin: 2px 0;
 }
 
 .heading {
@@ -58,9 +60,6 @@ input {
 }
 
 .weight {
-  border-width: 1px;
-  border-radius: 5px;
-  margin: 2px 0;
   width: 46;
 }
 

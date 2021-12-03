@@ -116,7 +116,7 @@ function WeightLabel(item, type) {
           id="${item}"
           class="weight"
           type="number"
-          value=${stances[targetStance][type][item]}
+          value=${stances[targetStance].strikes[strike]}
           onchange="
             stances[targetStance].${type}['${item}'] = parseInt(document.getElementById('${item}').value);
         ">
@@ -130,60 +130,94 @@ function WeightLabel(item, type) {
 function renderConfig() {
   let html = '';
   if (configOpen) {
-    html += `
-      <button type="button" onclick="exportConfig()">Export</button>
-      <button type="button" onclick="importConfig()">Import</button>
-      <button type="button" onclick="downloadConfig()">Download</button>
-      <button type="button" onclick="uploadConfig()">Upload</button>
-      <div id="file-upload-div"></div>
-      <br>
-    `;
+    html += `<button type="button" onclick="exportConfig()">Export</button>`;
+    html += `<button type="button" onclick="importConfig()">Import</button>`;
+    html += `<button type="button" onclick="downloadConfig()">Download</button>`;
+    html += `<button type="button" onclick="uploadConfig()">Upload</button>`;
+    html += `<div id="file-upload-div"></div>`;
+    html += '<br>'
     for (let stance in stances) {
       html += StanceBtn(stance);
     }
+    html += '<br>'
+    html += `<label class="heading"><b>Selected stance: ${capitalize(targetStance)} Stance</b></label>`;
+    html += '<br>'
     html += `
-      <br>
-      <label class="heading"><b>Selected stance: ${capitalize(targetStance)} Stance</b></label>
-      <br>
-      <label class="label">Weight: </label>
-      <input
-        class="weight"
-        id="stance-weight"
-        type="number"
-        value=${stances[targetStance].weight}
-        onchange="
-          stances[targetStance].weight = parseInt(document.getElementById('stance-weight').value);
-      ">
-      <button class="xBtn" onclick="
-        stances[targetStance].weight = 0;
-        renderConfig();
-      ">X</button>
-      <br>
-      ${TypeBtn('strikes')}
-      ${TypeBtn('blocks')}
-      <br>
-    `;
-
+    <label class="label">Weight: </label>
+    <input
+      class="weight"
+      id="stance-weight"
+      type="number"
+      value=${stances[targetStance].weight}
+      onchange="
+        stances[targetStance].weight = parseInt(document.getElementById('stance-weight').value);
+    ">
+    <button class="xBtn" onclick="
+      stances[targetStance].weight = 0;
+      renderConfig();
+    ">X</button>
+    <br>`
+    html += TypeBtn('strikes');
+    html += TypeBtn('blocks');
+    // html += `<button onClick="targetType = 'strikes', renderConfig();">Strikes</button>`;
+    // html += `<button onClick="targetType = 'blocks', renderConfig();">Blocks</button>`;
+    html += '<br>';
     html += `<label class="label heading"><b>${capitalize(targetType)}:</b></label>`;
     html += '<label class="label heading"><b>Weight:</b></label>';
-
-    for (let item in stances[targetStance][targetType]) {
-      html += WeightLabel(item, targetType);
-    }
-
-    html += `
-      <input class="label" id="add-${targetType}">
-      <button onClick="
-        stances[targetStance].${targetType}[document.getElementById('add-${targetType}').value] = 1;
+    if (targetType === 'strikes') {
+      for (let strike in stances[targetStance].strikes) {
+        html += WeightLabel(strike, targetType);
+        // html += `
+        // <label class="label">${strike}: </label>
+        // <input
+        //   id="${strike}"
+        //   class="weight"
+        //   type="number"
+        //   value=${stances[targetStance].strikes[strike]}
+        //   onchange="
+        //     stances[targetStance].strikes['${strike}'] = parseInt(document.getElementById('${strike}').value);
+        // ">
+        // <button class="xBtn" onclick="
+        //   delete stances[targetStance].strikes['${strike}'];
+        //   renderConfig();
+        // ">X</button>
+        // <br>`
+      }
+      html += `<input class="label" id="add-strike">`;
+      html += `<button onClick="
+        stances[targetStance].strikes[document.getElementById('add-strike').value] = 1;
         renderConfig();
-      ">Add ${capitalize(targetType.substr(0, targetType.length - 1))}</button>
-      <br>
-    `;
+      ">Add Strike</button>`;
+      html += '<br>'
+    } else {
+      for (let block in stances[targetStance].blocks) {
+        html += WeightLabel(block, targetType);
+        // html += `
+        // <label class="label">${block} block: </label>
+        // <input
+        //   id="${block}"
+        //   class="weight"
+        //   type="number"
+        //   value=${stances[targetStance].blocks[block]}
+        //   onchange="
+        //     stances[targetStance].blocks['${block}'] = parseInt(document.getElementById('${block}').value);
+        // ">
+        // <button class="xBtn" onclick="
+        //   delete stances[targetStance].blocks['${block}'];
+        //   renderConfig();
+        // ">X</button>
+        // <br>`
+      }
+      html += `<input class="label" id="add-block">`;
+      html += `<button onClick="
+        stances[targetStance].blocks[document.getElementById('add-block').value] = 1;
+        renderConfig();
+      ">Add Block</button>`;
+      html += '<br>'
+    }
   }
-
   document.getElementById('config').innerHTML = html;
   document.getElementById('config-btn').setAttribute('class', configOpen ? 'selected' : '');
-
   nextSet(
     document.getElementById('setLen').value,
     document.getElementById('sets').value

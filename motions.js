@@ -32,7 +32,7 @@ function nextSet(setSize, numOfSets) {
   for (let set = 0; set < numOfSets; set++) {
     for (let i = 0; i < setSize; i++) {
       const rp = getRandInt(0, 2) > 0 || i === 0 ? 'Retreating' : 'Pivoting';
-      const a = getRandInt(0, 1) === 1 ? 'Advancing' : rp;
+      let a = getRandInt(0, 1) === 1 ? 'Advancing' : rp;
       let stance = getRandStance(stances);
       let timeout = 50;
       while (a === 'Pivoting' && stance === lastStance && timeout > 0) {
@@ -40,7 +40,7 @@ function nextSet(setSize, numOfSets) {
           timeout--;
       }
       if (timeout === 0) {
-        break;
+        a = 'Retreating';
       }
 
       let technique;
