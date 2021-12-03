@@ -1,163 +1,171 @@
 {
-  "front": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2,
-      "c-punch": 1,
-      "oxjaw": 1,
-      "t-strike": 1
+  "stances": {
+    "front": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2,
+        "c-punch": 1,
+        "oxjaw": 1,
+        "t-strike": 1
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1
+      },
+      "weight": 4
     },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1
+    "back": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1
+      },
+      "weight": 4
     },
-    "weight": 4
-  },
-  "back": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2
+    "tiger": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2,
+        "oxjaw": 1
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1
+      },
+      "weight": 3
     },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1
+    "horse": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1,
+        "mountain": 1
+      },
+      "weight": 3
     },
-    "weight": 4
-  },
-  "tiger": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2,
-      "oxjaw": 1
+    "twisted": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1
+      },
+      "weight": 2
     },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1
-    },
-    "weight": 3
-  },
-  "horse": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2
-    },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1,
-      "mountain": 1
-    },
-    "weight": 3
-  },
-  "twisted": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2
-    },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1
-    },
-    "weight": 2
-  },
-  "crane": {
-    "strikes": {
-      "middle punch": 4,
-      "ridge hand": 2,
-      "inverted ridge hand": 1,
-      "backfist": 2,
-      "reverse punch": 2,
-      "chop": 3,
-      "spear-hand": 2,
-      "tigermouth": 2
-    },
-    "blocks": {
-      "down": 1,
-      "up": 1,
-      "double knife-hand": 1,
-      "knife-hand": 1,
-      "inside-outside": 1,
-      "outside-inside": 1,
-      "downward palm": 1,
-      "push": 1,
-      "Y": 1,
-      "high-low": 1,
-      "X": 1
-    },
-    "weight": 1
+    "crane": {
+      "strikes": {
+        "middle punch": 4,
+        "ridge hand": 2,
+        "inverted ridge hand": 1,
+        "backfist": 2,
+        "reverse punch": 2,
+        "chop": 3,
+        "spear-hand": 2,
+        "tigermouth": 2
+      },
+      "blocks": {
+        "down": 4,
+        "up": 4,
+        "double knife-hand": 3,
+        "knife-hand": 3,
+        "inside-outside": 2,
+        "forearm": 2,
+        "outside-inside": 2,
+        "downward palm": 1,
+        "push": 2,
+        "Y": 1,
+        "high-low": 1,
+        "X": 1
+      },
+      "weight": 1
+    }
   }
 }

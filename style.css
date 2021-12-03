@@ -18,10 +18,31 @@
   border-radius: 10px;
 }
 
+button {
+  border-width: 2px;
+  border-radius: 5px;
+  border-style: outset;
+  margin: 2px 2px;
+}
+
+button:active {
+  border-style: inset;
+  background-color: rgb(210, 210, 210);
+}
+
+button.selected {
+  border-style: inset;
+  background-color: rgb(210, 210, 210);
+}
+
 label {
   display: inline-block;
   margin-left: 2%;
   width: 90px;
+}
+
+input {
+  margin: 0 0;
 }
 
 .heading {
@@ -31,16 +52,28 @@ label {
 }
 
 .label {
+  margin: 2px 0;
   margin-left: 2%;
   width: 40%;
 }
 
 .weight {
-  margin: 0 0;
-  width: 46%;
+  border-width: 1px;
+  border-radius: 5px;
+  margin: 2px 0;
+  width: 46;
 }
 
 .xBtn {
   margin: 0 0;
   width: 8%;
 }
+
+/* #file-upload-div {
+  display: inline-block;
+  width: 30%;
+} */
+
+/* #config-upload {
+  width: 100%;
+} */

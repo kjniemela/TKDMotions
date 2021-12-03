@@ -9,6 +9,16 @@ function extend(obj1, obj2) {
   return returnObject;
 }
 
+function downloadObjectAsJson(exportObj, exportName){
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", exportName + ".json");
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
 function capitalize(string) {
   return string[0].toUpperCase() + string.substring(1);
 }
@@ -24,14 +34,15 @@ const strikes = {
   'tigermouth': 2
 }
 const blocks = {
-  'down': 1,
-  'up': 1,
-  'double knife-hand': 1,
-  'knife-hand': 1,
-  'inside-outside': 1,
-  'outside-inside': 1,
+  'down': 4,
+  'up': 4,
+  'double knife-hand': 3,
+  'knife-hand': 3,
+  'inside-outside': 2,
+  'forearm': 2,
+  'outside-inside': 2,
   'downward palm': 1,
-  'push': 1,
+  'push': 2,
   'Y': 1,
   'high-low': 1,
   'X': 1
@@ -68,25 +79,49 @@ const stances = {
     'weight': 1
   }
 }
+const forbiddenSequences = {
+  'strike1': ['strike2', 'strike3'],
+  'block1': ['strike2', 'block2']
+};
+
+function getPairList(seqs) {
+  let pairList = [];
+  for (let item in seqs) {
+    for (let item2 of seqs[item]) {
+      pairList.push([item, item2]);
+    }
+  }
+  return pairList;
+}
 
 let targetStance = 'front';
 let targetType = 'strikes';
 
+function StanceBtn(stance) {
+ return `<button
+      class="${targetStance === stance ? 'selected' : ''}"
+      onClick="targetStance = '${stance}', renderConfig();">${capitalize(stance)}</button>`;
+}
+
 function renderConfig() {
   let html = '';
   if (configOpen) {
-    html += `<button onClick="targetStance = 'front', renderConfig();">Front</button>`;
-    html += `<button onClick="targetStance = 'back', renderConfig();">Back</button>`;
-    html += `<button onClick="targetStance = 'tiger', renderConfig();">Tiger</button>`;
-    html += `<button onClick="targetStance = 'horse', renderConfig();">Horse</button>`;
-    html += `<button onClick="targetStance = 'twisted', renderConfig();">Twisted</button>`;
-    html += `<button onClick="targetStance = 'crane', renderConfig();">Crane</button>`;
+    html += `<button type="button" onclick="exportConfig()">Export</button>`;
+    html += `<button type="button" onclick="importConfig()">Import</button>`;
+    html += `<button type="button" onclick="downloadConfig()">Download</button>`;
+    html += `<button type="button" onclick="uploadConfig()">Upload</button>`;
+    html += `<div id="file-upload-div"></div>`;
+    html += '<br>'
+    for (let stance in stances) {
+      html += StanceBtn(stance);
+    }
     html += '<br>'
     html += `<label class="heading"><b>Selected stance: ${capitalize(targetStance)} Stance</b></label>`;
     html += '<br>'
     html += `
     <label class="label">Weight: </label>
     <input
+      class="weight"
       id="stance-weight"
       type="number"
       value=${stances[targetStance].weight}
@@ -109,6 +144,7 @@ function renderConfig() {
         <label class="label">${strike}: </label>
         <input
           id="${strike}"
+          class="weight"
           type="number"
           value=${stances[targetStance].strikes[strike]}
           onchange="
@@ -120,7 +156,7 @@ function renderConfig() {
         ">X</button>
         <br>`
       }
-      html += `<input id="add-strike">`;
+      html += `<input class="label" id="add-strike">`;
       html += `<button onClick="
         stances[targetStance].strikes[document.getElementById('add-strike').value] = 1;
         renderConfig();
@@ -132,6 +168,7 @@ function renderConfig() {
         <label class="label">${block} block: </label>
         <input
           id="${block}"
+          class="weight"
           type="number"
           value=${stances[targetStance].blocks[block]}
           onchange="
@@ -143,7 +180,7 @@ function renderConfig() {
         ">X</button>
         <br>`
       }
-      html += `<input id="add-block">`;
+      html += `<input class="label" id="add-block">`;
       html += `<button onClick="
         stances[targetStance].blocks[document.getElementById('add-block').value] = 1;
         renderConfig();
@@ -165,15 +202,75 @@ function toggleConfig() {
 }
 
 function exportConfig() {
-  navigator.clipboard.writeText(JSON.stringify(stances));
-  console.log(JSON.stringify(stances));
+  const data = {
+    stances: stances
+  }
+  navigator.clipboard.writeText(JSON.stringify(data));
+  console.log(JSON.stringify(data));
 }
 
 function importConfig() {
-  const newStances = JSON.parse(prompt('JSON config string:'));
+  loadConfig(prompt('JSON config string:'));
+}
+
+function loadConfig(string) {
+  const data = JSON.parse(string);
+  const newStances = data.stances;
   for (let stance in newStances) {
     stances[stance] = newStances[stance];
   }
   configOpen = true;
   renderConfig();
+}
+
+function downloadConfig() {
+  const data = {
+    stances: stances
+  }
+  downloadObjectAsJson(data, 'config');
+}
+
+function uploadConfig() {
+  let oldLabel = document.getElementById('upload-label');
+  if (oldLabel) {
+    oldLabel.remove();
+  }
+  let oldUpload = document.getElementById('config-upload');
+  if (oldUpload) {
+    oldUpload.remove();
+  }
+  let newLabel = document.createElement('label');
+  newLabel.setAttribute('class', 'label');
+  newLabel.setAttribute('id', 'upload-label');
+  newLabel.innerText = 'Config file:';
+  document.getElementById('file-upload-div').appendChild(newLabel);
+  let newUpload = document.createElement('INPUT');
+  newUpload.setAttribute('type', 'file');
+  newUpload.setAttribute('class', 'weight');
+  newUpload.setAttribute('id', 'config-upload');
+  newUpload.setAttribute('accept', 'application/json');
+  document.getElementById('file-upload-div').appendChild(newUpload);
+  (function(){ // by Sam Greenhalgh from stackoverflow
+
+    function onChange(event) {
+        var reader = new FileReader();
+        reader.onload = onReaderLoad;
+        reader.readAsText(event.target.files[0]);
+    }
+
+    function onReaderLoad(event){
+        console.log(event.target.result);
+        loadConfig(event.target.result);
+    }
+
+    document.getElementById('config-upload').addEventListener('change', onChange);
+
+  }());
+  // const data = JSON.parse(prompt('JSON config string:'));
+  // const newStances = data.stances;
+  // for (let stance in newStances) {
+  //   stances[stance] = newStances[stance];
+  // }
+  // configOpen = true;
+  // renderConfig();
 }
